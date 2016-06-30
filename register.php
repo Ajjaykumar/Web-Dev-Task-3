@@ -38,7 +38,17 @@ if($err!=0){
 }
 
 
-
+require_once("db.php");
+$db_handle = new DBController();
+$query = "INSERT INTO registered_users (name,age,eid,gender,Password,pno) VALUES
+('" . $_POST["name"] . "', '" . $_POST["age"] . "', '" . $_POST["eid"] . "', '" . md5($_POST["gender"]) . "', '" . $_POST["Password"] . "', '" . $_POST["pno"] . "')";
+$result = $db_handle->insertQuery($query);
+if(!empty($result)) {
+	$message = "You have registered successfully!";	
+	unset($_POST);
+} else {
+	$message = "Problem in registration. Try Again!";	
+}
 
 
 {echo"<br>";
